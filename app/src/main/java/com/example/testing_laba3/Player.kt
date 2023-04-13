@@ -20,5 +20,6 @@ class Player {
     }
 
     fun makeMove(pos: Pair<Int, Int>, board: ArrayList<ArrayList<Int>>) {
+        board[pos.first][pos.second] = figure
     }
 }
