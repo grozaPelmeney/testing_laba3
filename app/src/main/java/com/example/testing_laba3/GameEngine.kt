@@ -3,6 +3,13 @@ package com.example.testing_laba3
 // в качестве доски будет выстyпать 2-мерный массив 3х3 со значениями:
 // 0 - пусто; 1 - крестик; 2 - нолик
 
+enum class GameStatus {
+    WINNER_X,
+    WINNER_O,
+    NO_WINNER,
+    CONTINUE_GAME,
+}
+
 class GameEngine {
     private var playerX: Player? = null
     private var playerO: Player? = null

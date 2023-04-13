@@ -93,6 +93,11 @@ class GameTest {
                     arrayListOf(o, o, x),
                     arrayListOf(x, o, o)
                 ),
+                arrayListOf( //игра не окончена
+                    arrayListOf(x, x, 0),
+                    arrayListOf(o, 0, x),
+                    arrayListOf(0, 0, o)
+                ),
                 arrayListOf( //нет победителя
                     arrayListOf(x, x, o),
                     arrayListOf(o, o, x),
@@ -104,10 +109,13 @@ class GameTest {
 
         boards.forEach { board ->
             engine.board = board
-            res.add(engine.checkGameOver()) //метод возвращает x или о, если кто-то выиграл и 0, если игра не окончена
+            res.add(engine.checkGameOver())
         }
 
-        val expected = listOf(x, o, x, o, 0)
+        val expected = listOf(
+            GameStatus.WINNER_X, GameStatus.WINNER_O, GameStatus.WINNER_X,
+            GameStatus.WINNER_O, GameStatus.CONTINUE_GAME, GameStatus.NO_WINNER
+        )
         val actual = res.toList()
 
         assertEquals(expected, actual)
