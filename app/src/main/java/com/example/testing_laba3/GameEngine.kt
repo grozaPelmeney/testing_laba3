@@ -7,6 +7,12 @@ class GameEngine {
     private var playerX: Player? = null
     private var playerO: Player? = null
 
+    var board = getEmptyBoard()
+
+    fun checkGameOver(): Int {
+        return 0
+    }
+
     fun createPlayerX(): Player {
         playerX = Player().apply { figure = x }
         return playerX!!

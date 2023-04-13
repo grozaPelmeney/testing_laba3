@@ -65,4 +65,51 @@ class GameTest {
 
         assertEquals(expected, actual)
     }
+
+    //Тест для првоерки окончания игры
+    @Test
+    fun `check game is over`() {
+        val engine = GameEngine()
+
+        val boards =
+            listOf(
+                arrayListOf( //выиграл х по 1 строке
+                    arrayListOf(x, x, x),
+                    arrayListOf(o, o, x),
+                    arrayListOf(x, x, o)
+                ),
+                arrayListOf( //выиграл о по 2 столбцу
+                    arrayListOf(x, o, x),
+                    arrayListOf(o, o, x),
+                    arrayListOf(x, o, o)
+                ),
+                arrayListOf( //выиграл х по побочной диагонали
+                    arrayListOf(x, o, x),
+                    arrayListOf(o, x, x),
+                    arrayListOf(x, o, o)
+                ),
+                arrayListOf( //выиграл о по главной диагонали
+                    arrayListOf(o, x, x),
+                    arrayListOf(o, o, x),
+                    arrayListOf(x, o, o)
+                ),
+                arrayListOf( //нет победителя
+                    arrayListOf(x, x, o),
+                    arrayListOf(o, o, x),
+                    arrayListOf(x, o, o)
+                ),
+            )
+
+        val res = mutableListOf<Int>() //массив результатов
+
+        boards.forEach { board ->
+            engine.board = board
+            res.add(engine.checkGameOver()) //метод возвращает x или о, если кто-то выиграл и 0, если игра не окончена
+        }
+
+        val expected = listOf(x, o, x, o, 0)
+        val actual = res.toList()
+
+        assertEquals(expected, actual)
+    }
 }
