@@ -30,7 +30,7 @@ class GameTest {
 
         val player = Player()
 
-        val expected = Pair(1, 1)
+        val expected = Pair(2, 1)
         val actual = player.canMakeMove(board)
 
         assertEquals(expected, actual)
