@@ -10,6 +10,30 @@ class GameEngine {
     var board = getEmptyBoard()
 
     fun checkGameOver(): Int {
+        //Смотрим победителя по строкам
+        for (i in 0 until board.size) {
+            if (board[i][0] != 0 && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+                return board[i][0]
+            }
+        }
+
+        //Смотрим победителя по столбцам
+        for (j in 0 until board[0].size) {
+            if (board[0][j] != 0 && board[0][j] == board[1][j] && board[1][j] == board[2][j]) {
+                return board[0][j]
+            }
+        }
+
+        //Смотрим победителя главной диагонали
+        if (board[0][0] != 0 && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+            return board[0][0]
+        }
+
+        //Смотрим победителя побочной диагонали
+        if (board[2][0] != 0 && board[2][0] == board[1][1] && board[1][1] == board[0][2]) {
+            return board[2][0]
+        }
+
         return 0
     }
 
