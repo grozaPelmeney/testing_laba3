@@ -105,7 +105,7 @@ class GameTest {
                 ),
             )
 
-        val res = mutableListOf<Int>() //массив результатов
+        val res = mutableListOf<GameStatus>() //массив результатов
 
         boards.forEach { board ->
             engine.board = board
