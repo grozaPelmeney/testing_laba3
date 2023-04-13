@@ -18,4 +18,7 @@ class Player {
 
         return pos
     }
+
+    fun makeMove(pos: Pair<Int, Int>, board: ArrayList<ArrayList<Int>>) {
+    }
 }
