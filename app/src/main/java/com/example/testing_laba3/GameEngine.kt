@@ -1,5 +1,8 @@
 package com.example.testing_laba3
 
+import kotlin.random.Random
+
+
 // в качестве доски будет выстyпать 2-мерный массив 3х3 со значениями:
 // 0 - пусто; 1 - крестик; 2 - нолик
 
@@ -15,6 +18,68 @@ class GameEngine {
     private var playerO: Player? = null
 
     var board = getEmptyBoard()
+
+    var currentPlayer: Player? = null
+
+    private fun printBoard() {
+        for (i in 0 until board.size) {
+            for (j in 0 until board[i].size) {
+                val symbol =
+                    when (board[i][j]) {
+                        x -> 'x'
+                        o -> 'o'
+                        else -> '_'
+                    }
+
+                print(
+                    if (j == 1)  "| ${symbol} |"
+                    else " ${symbol} "
+                )
+            }
+            println()
+        }
+    }
+
+    fun startGame() {
+        createPlayerX()
+        createPlayerO()
+
+        currentPlayer = if (Random.nextBoolean()) playerO else playerX
+        var symbol = if (currentPlayer!!.figure == x) "'x'" else "'o'"
+        println("Первым ходит ${symbol}")
+
+        var counter = 0
+        while (counter < MAX_MOVES_COUNT + 2) {
+            val pos = currentPlayer?.canMakeMove(board)
+
+            if (pos != null) {
+                currentPlayer?.makeMove(pos, board)
+
+                println("------------")
+                println("Игрок ${symbol} сделал ход:")
+
+                printBoard()
+            }
+
+            val status = checkGameOver()
+
+            if (status != GameStatus.CONTINUE_GAME) {
+                println("Игра окончена за ${counter + 1} ход(-ов)!")
+
+                println(
+                    if (status == GameStatus.NO_WINNER) "Победителя нет!"
+                    else "Победил ${symbol}!"
+                )
+
+                break
+            }
+
+            currentPlayer = if (currentPlayer!!.figure == x) playerO else playerX
+            symbol = if (currentPlayer!!.figure == x) "'x'" else "'o'"
+
+            counter++
+        }
+    }
 
     fun checkGameOver(): GameStatus {
         //Смотрим победителя по строкам
@@ -59,6 +124,8 @@ class GameEngine {
     companion object {
         const val x = 1
         const val o = 2
+
+        private const val MAX_MOVES_COUNT = 255168
 
         fun getEmptyBoard(): ArrayList<ArrayList<Int>> {
             return arrayListOf(
