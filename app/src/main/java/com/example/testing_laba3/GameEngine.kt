@@ -4,6 +4,13 @@ package com.example.testing_laba3
 // 0 - пусто; 1 - крестик; 2 - нолик
 
 class GameEngine {
+    fun createPlayerX(): Player {
+        return Player()
+    }
+
+    fun createPlayerO(): Player {
+        return Player()
+    }
 
     companion object {
         fun getEmptyBoard(): ArrayList<ArrayList<Int>> {

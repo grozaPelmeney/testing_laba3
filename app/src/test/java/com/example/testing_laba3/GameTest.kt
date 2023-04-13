@@ -51,4 +51,18 @@ class GameTest {
 
         assertEquals(expected, actual)
     }
+
+    //Тест для создания игроков
+    @Test
+    fun `check creating players`() {
+        val engine = GameEngine()
+
+        val pX = engine.createPlayerX()
+        val pO = engine.createPlayerO()
+
+        val expected = true
+        val actual = pX.figure == x && pO.figure == o
+
+        assertEquals(expected, actual)
+    }
 }
