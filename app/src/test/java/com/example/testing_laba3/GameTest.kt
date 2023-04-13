@@ -4,8 +4,8 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 class GameTest {
-    private val x = 1
-    private val o = 2
+    private val x = GameEngine.x
+    private val o = GameEngine.o
 
     //Тесты для проверки, может ли игрок сделать ход
     @Test
